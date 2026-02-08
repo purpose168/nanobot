@@ -1,6 +1,6 @@
 <div align="center">
   <img src="nanobot_logo.png" alt="nanobot" width="500">
-  <h1>nanobot: Ultra-Lightweight Personal AI Assistant</h1>
+  <h1>nanobot: 超轻量级个人 AI 助手</h1>
   <p>
     <a href="https://pypi.org/project/nanobot-ai/"><img src="https://img.shields.io/pypi/v/nanobot-ai" alt="PyPI"></a>
     <a href="https://pepy.tech/project/nanobot-ai"><img src="https://static.pepy.tech/badge/nanobot-ai" alt="Downloads"></a>
@@ -12,46 +12,46 @@
   </p>
 </div>
 
-🐈 **nanobot** is an **ultra-lightweight** personal AI assistant inspired by [Clawdbot](https://github.com/openclaw/openclaw) 
+🐈 **nanobot** 是一个**超轻量级**个人 AI 助手，灵感来源于 [Clawdbot](https://github.com/openclaw/openclaw)
 
-⚡️ Delivers core agent functionality in just **~4,000** lines of code — **99% smaller** than Clawdbot's 430k+ lines.
+⚡️ 仅用**约 4,000** 行代码实现核心智能体功能 —— 比 Clawdbot 的 43 万+ 行代码**小 99%**。
 
-📏 Real-time line count: **3,423 lines** (run `bash core_agent_lines.sh` to verify anytime)
+📏 实时代码行数：**3,423 行**（随时运行 `bash core_agent_lines.sh` 验证）
 
-## 📢 News
+## 📢 最新动态
 
-- **2026-02-08** 🔧 Refactored Providers—adding a new LLM provider now takes just 2 simple steps! Check [here](#providers).
-- **2026-02-07** 🚀 Released v0.1.3.post5 with Qwen support & several key improvements! Check [here](https://github.com/HKUDS/nanobot/releases/tag/v0.1.3.post5) for details.
-- **2026-02-06** ✨ Added Moonshot/Kimi provider, Discord integration, and enhanced security hardening!
-- **2026-02-05** ✨ Added Feishu channel, DeepSeek provider, and enhanced scheduled tasks support!
-- **2026-02-04** 🚀 Released v0.1.3.post4 with multi-provider & Docker support! Check [here](https://github.com/HKUDS/nanobot/releases/tag/v0.1.3.post4) for details.
-- **2026-02-03** ⚡ Integrated vLLM for local LLM support and improved natural language task scheduling!
-- **2026-02-02** 🎉 nanobot officially launched! Welcome to try 🐈 nanobot!
+- **2026-02-08** 🔧 重构了 Providers —— 添加新的 LLM 提供商现在只需 2 个简单步骤！查看 [这里](#providers)。
+- **2026-02-07** 🚀 发布了 v0.1.3.post5 版本，支持 Qwen 模型并进行了多项关键改进！查看 [这里](https://github.com/HKUDS/nanobot/releases/tag/v0.1.3.post5) 了解详情。
+- **2026-02-06** ✨ 添加了 Moonshot/Kimi 提供商、Discord 集成和增强的安全加固！
+- **2026-02-05** ✨ 添加了飞书通道、DeepSeek 提供商和增强的定时任务支持！
+- **2026-02-04** 🚀 发布了 v0.1.3.post4 版本，支持多提供商和 Docker！查看 [这里](https://github.com/HKUDS/nanobot/releases/tag/v0.1.3.post4) 了解详情。
+- **2026-02-03** ⚡ 集成了 vLLM 以支持本地 LLM 和改进的自然语言任务调度！
+- **2026-02-02** 🎉 nanobot 正式发布！欢迎尝试 🐈 nanobot！
 
-## Key Features of nanobot:
+## nanobot 的核心特性：
 
-🪶 **Ultra-Lightweight**: Just ~4,000 lines of core agent code — 99% smaller than Clawdbot.
+🪶 **超轻量级**：核心智能体代码仅约 4,000 行 —— 比 Clawdbot 小 99%。
 
-🔬 **Research-Ready**: Clean, readable code that's easy to understand, modify, and extend for research.
+🔬 **研究就绪**：代码整洁易读，易于理解、修改和扩展，适合研究使用。
 
-⚡️ **Lightning Fast**: Minimal footprint means faster startup, lower resource usage, and quicker iterations.
+⚡️ **闪电般快速**：最小化的代码足迹意味着更快的启动速度、更低的资源占用和更快的迭代。
 
-💎 **Easy-to-Use**: One-click to deploy and you're ready to go.
+💎 **易于使用**：一键部署，即可开始使用。
 
-## 🏗️ Architecture
+## 🏗️ 架构
 
 <p align="center">
   <img src="nanobot_arch.png" alt="nanobot architecture" width="800">
 </p>
 
-## ✨ Features
+## ✨ 功能
 
 <table align="center">
   <tr align="center">
-    <th><p align="center">📈 24/7 Real-Time Market Analysis</p></th>
-    <th><p align="center">🚀 Full-Stack Software Engineer</p></th>
-    <th><p align="center">📅 Smart Daily Routine Manager</p></th>
-    <th><p align="center">📚 Personal Knowledge Assistant</p></th>
+    <th><p align="center">📈 24/7 实时市场分析</p></th>
+    <th><p align="center">🚀 全栈软件工程师</p></th>
+    <th><p align="center">📅 智能日常管理助手</p></th>
+    <th><p align="center">📚 个人知识助手</p></th>
   </tr>
   <tr>
     <td align="center"><p align="center"><img src="case/search.gif" width="180" height="400"></p></td>
@@ -60,16 +60,16 @@
     <td align="center"><p align="center"><img src="case/memory.gif" width="180" height="400"></p></td>
   </tr>
   <tr>
-    <td align="center">Discovery • Insights • Trends</td>
-    <td align="center">Develop • Deploy • Scale</td>
-    <td align="center">Schedule • Automate • Organize</td>
-    <td align="center">Learn • Memory • Reasoning</td>
+    <td align="center">发现 • 洞察 • 趋势</td>
+    <td align="center">开发 • 部署 • 扩展</td>
+    <td align="center">计划 • 自动化 • 组织</td>
+    <td align="center">学习 • 记忆 • 推理</td>
   </tr>
 </table>
 
-## 📦 Install
+## 📦 安装
 
-**Install from source** (latest features, recommended for development)
+**从源码安装**（最新特性，推荐用于开发）
 
 ```bash
 git clone https://github.com/HKUDS/nanobot.git
@@ -77,33 +77,33 @@ cd nanobot
 pip install -e .
 ```
 
-**Install with [uv](https://github.com/astral-sh/uv)** (stable, fast)
+**使用 [uv](https://github.com/astral-sh/uv) 安装**（稳定，快速）
 
 ```bash
 uv tool install nanobot-ai
 ```
 
-**Install from PyPI** (stable)
+**从 PyPI 安装**（稳定）
 
 ```bash
 pip install nanobot-ai
 ```
 
-## 🚀 Quick Start
+## 🚀 快速开始
 
 > [!TIP]
-> Set your API key in `~/.nanobot/config.json`.
-> Get API keys: [OpenRouter](https://openrouter.ai/keys) (Global) · [DashScope](https://dashscope.console.aliyun.com) (Qwen) · [Brave Search](https://brave.com/search/api/) (optional, for web search)
+> 在 `~/.nanobot/config.json` 中设置您的 API 密钥。
+> 获取 API 密钥：[OpenRouter](https://openrouter.ai/keys)（全球）· [DashScope](https://dashscope.console.aliyun.com)（Qwen）· [Brave Search](https://brave.com/search/api/)（可选，用于网络搜索）
 
-**1. Initialize**
+**1. 初始化**
 
 ```bash
 nanobot onboard
 ```
 
-**2. Configure** (`~/.nanobot/config.json`)
+**2. 配置** (`~/.nanobot/config.json`)
 
-For OpenRouter - recommended for global users:
+对于 OpenRouter - 推荐全球用户使用：
 ```json
 {
   "providers": {
@@ -119,25 +119,25 @@ For OpenRouter - recommended for global users:
 }
 ```
 
-**3. Chat**
+**3. 聊天**
 
 ```bash
 nanobot agent -m "What is 2+2?"
 ```
 
-That's it! You have a working AI assistant in 2 minutes.
+就是这样！您在 2 分钟内拥有了一个可用的 AI 助手。
 
-## 🖥️ Local Models (vLLM)
+## 🖥️ 本地模型 (vLLM)
 
-Run nanobot with your own local models using vLLM or any OpenAI-compatible server.
+使用 vLLM 或任何兼容 OpenAI 的服务器运行您自己的本地模型。
 
-**1. Start your vLLM server**
+**1. 启动 vLLM 服务器**
 
 ```bash
 vllm serve meta-llama/Llama-3.1-8B-Instruct --port 8000
 ```
 
-**2. Configure** (`~/.nanobot/config.json`)
+**2. 配置** (`~/.nanobot/config.json`)
 
 ```json
 {
@@ -155,35 +155,35 @@ vllm serve meta-llama/Llama-3.1-8B-Instruct --port 8000
 }
 ```
 
-**3. Chat**
+**3. 聊天**
 
 ```bash
 nanobot agent -m "Hello from my local LLM!"
 ```
 
 > [!TIP]
-> The `apiKey` can be any non-empty string for local servers that don't require authentication.
+> 对于不需要身份验证的本地服务器，`apiKey` 可以是任何非空字符串。
 
-## 💬 Chat Apps
+## 💬 聊天应用
 
-Talk to your nanobot through Telegram, Discord, WhatsApp, or Feishu — anytime, anywhere.
+通过 Telegram、Discord、WhatsApp 或飞书与您的 nanobot 交流 —— 随时随地。
 
-| Channel | Setup |
+| 通道 | 设置难度 |
 |---------|-------|
-| **Telegram** | Easy (just a token) |
-| **Discord** | Easy (bot token + intents) |
-| **WhatsApp** | Medium (scan QR) |
-| **Feishu** | Medium (app credentials) |
+| **Telegram** | 简单（只需一个令牌） |
+| **Discord** | 简单（机器人令牌 + 意图） |
+| **WhatsApp** | 中等（扫描二维码） |
+| **Feishu** | 中等（应用凭证） |
 
 <details>
-<summary><b>Telegram</b> (Recommended)</summary>
+<summary><b>Telegram</b>（推荐）</summary>
 
-**1. Create a bot**
-- Open Telegram, search `@BotFather`
-- Send `/newbot`, follow prompts
-- Copy the token
+**1. 创建机器人**
+- 打开 Telegram，搜索 `@BotFather`
+- 发送 `/newbot`，按照提示操作
+- 复制令牌
 
-**2. Configure**
+**2. 配置**
 
 ```json
 {
@@ -197,9 +197,9 @@ Talk to your nanobot through Telegram, Discord, WhatsApp, or Feishu — anytime,
 }
 ```
 
-> Get your user ID from `@userinfobot` on Telegram.
+> 从 Telegram 上的 `@userinfobot` 获取您的用户 ID。
 
-**3. Run**
+**3. 运行**
 
 ```bash
 nanobot gateway
@@ -210,20 +210,20 @@ nanobot gateway
 <details>
 <summary><b>Discord</b></summary>
 
-**1. Create a bot**
-- Go to https://discord.com/developers/applications
-- Create an application → Bot → Add Bot
-- Copy the bot token
+**1. 创建机器人**
+- 前往 https://discord.com/developers/applications
+- 创建应用 → Bot → Add Bot
+- 复制机器人令牌
 
-**2. Enable intents**
-- In the Bot settings, enable **MESSAGE CONTENT INTENT**
-- (Optional) Enable **SERVER MEMBERS INTENT** if you plan to use allow lists based on member data
+**2. 启用意图**
+- 在 Bot 设置中，启用 **MESSAGE CONTENT INTENT**
+- （可选）如果您计划使用基于成员数据的允许列表，请启用 **SERVER MEMBERS INTENT**
 
-**3. Get your User ID**
-- Discord Settings → Advanced → enable **Developer Mode**
-- Right-click your avatar → **Copy User ID**
+**3. 获取您的用户 ID**
+- Discord 设置 → 高级 → 启用 **开发者模式**
+- 右键点击您的头像 → **复制用户 ID**
 
-**4. Configure**
+**4. 配置**
 
 ```json
 {
@@ -237,13 +237,13 @@ nanobot gateway
 }
 ```
 
-**5. Invite the bot**
+**5. 邀请机器人**
 - OAuth2 → URL Generator
 - Scopes: `bot`
 - Bot Permissions: `Send Messages`, `Read Message History`
-- Open the generated invite URL and add the bot to your server
+- 打开生成的邀请 URL 并将机器人添加到您的服务器
 
-**6. Run**
+**6. 运行**
 
 ```bash
 nanobot gateway
@@ -254,16 +254,16 @@ nanobot gateway
 <details>
 <summary><b>WhatsApp</b></summary>
 
-Requires **Node.js ≥18**.
+需要 **Node.js ≥18**。
 
-**1. Link device**
+**1. 链接设备**
 
 ```bash
 nanobot channels login
-# Scan QR with WhatsApp → Settings → Linked Devices
+# 使用 WhatsApp 扫描二维码 → 设置 → 链接设备
 ```
 
-**2. Configure**
+**2. 配置**
 
 ```json
 {
@@ -276,13 +276,13 @@ nanobot channels login
 }
 ```
 
-**3. Run** (two terminals)
+**3. 运行**（两个终端）
 
 ```bash
-# Terminal 1
+# 终端 1
 nanobot channels login
 
-# Terminal 2
+# 终端 2
 nanobot gateway
 ```
 
@@ -291,22 +291,22 @@ nanobot gateway
 <details>
 <summary><b>Feishu (飞书)</b></summary>
 
-Uses **WebSocket** long connection — no public IP required.
+使用 **WebSocket** 长连接 —— 无需公网 IP。
 
 ```bash
 pip install nanobot-ai[feishu]
 ```
 
-**1. Create a Feishu bot**
-- Visit [Feishu Open Platform](https://open.feishu.cn/app)
-- Create a new app → Enable **Bot** capability
-- **Permissions**: Add `im:message` (send messages)
-- **Events**: Add `im.message.receive_v1` (receive messages)
-  - Select **Long Connection** mode (requires running nanobot first to establish connection)
-- Get **App ID** and **App Secret** from "Credentials & Basic Info"
-- Publish the app
+**1. 创建飞书机器人**
+- 访问 [飞书开放平台](https://open.feishu.cn/app)
+- 创建新应用 → 启用 **Bot** 能力
+- **权限**：添加 `im:message`（发送消息）
+- **事件**：添加 `im.message.receive_v1`（接收消息）
+  - 选择 **长连接** 模式（需要先运行 nanobot 以建立连接）
+- 从 "凭证与基础信息" 获取 **App ID** 和 **App Secret**
+- 发布应用
 
-**2. Configure**
+**2. 配置**
 
 ```json
 {
@@ -323,63 +323,63 @@ pip install nanobot-ai[feishu]
 }
 ```
 
-> `encryptKey` and `verificationToken` are optional for Long Connection mode.
-> `allowFrom`: Leave empty to allow all users, or add `["ou_xxx"]` to restrict access.
+> `encryptKey` 和 `verificationToken` 对于长连接模式是可选的。
+> `allowFrom`：留空以允许所有用户，或添加 `["ou_xxx"]` 以限制访问。
 
-**3. Run**
+**3. 运行**
 
 ```bash
 nanobot gateway
 ```
 
 > [!TIP]
-> Feishu uses WebSocket to receive messages — no webhook or public IP needed!
+> 飞书使用 WebSocket 接收消息 —— 无需 webhook 或公网 IP！
 
 </details>
 
-## ⚙️ Configuration
+## ⚙️ 配置
 
-Config file: `~/.nanobot/config.json`
+配置文件：`~/.nanobot/config.json`
 
 ### Providers
 
 > [!NOTE]
-> Groq provides free voice transcription via Whisper. If configured, Telegram voice messages will be automatically transcribed.
+> Groq 通过 Whisper 提供免费的语音转录。如果配置了，Telegram 语音消息将被自动转录。
 
-| Provider | Purpose | Get API Key |
+| Provider | 用途 | 获取 API 密钥 |
 |----------|---------|-------------|
-| `openrouter` | LLM (recommended, access to all models) | [openrouter.ai](https://openrouter.ai) |
-| `anthropic` | LLM (Claude direct) | [console.anthropic.com](https://console.anthropic.com) |
-| `openai` | LLM (GPT direct) | [platform.openai.com](https://platform.openai.com) |
-| `deepseek` | LLM (DeepSeek direct) | [platform.deepseek.com](https://platform.deepseek.com) |
-| `groq` | LLM + **Voice transcription** (Whisper) | [console.groq.com](https://console.groq.com) |
-| `gemini` | LLM (Gemini direct) | [aistudio.google.com](https://aistudio.google.com) |
-| `aihubmix` | LLM (API gateway, access to all models) | [aihubmix.com](https://aihubmix.com) |
-| `dashscope` | LLM (Qwen) | [dashscope.console.aliyun.com](https://dashscope.console.aliyun.com) |
-| `moonshot` | LLM (Moonshot/Kimi) | [platform.moonshot.cn](https://platform.moonshot.cn) |
-| `zhipu` | LLM (Zhipu GLM) | [open.bigmodel.cn](https://open.bigmodel.cn) |
-| `vllm` | LLM (local, any OpenAI-compatible server) | — |
+| `openrouter` | LLM（推荐，访问所有模型） | [openrouter.ai](https://openrouter.ai) |
+| `anthropic` | LLM（直接访问 Claude） | [console.anthropic.com](https://console.anthropic.com) |
+| `openai` | LLM（直接访问 GPT） | [platform.openai.com](https://platform.openai.com) |
+| `deepseek` | LLM（直接访问 DeepSeek） | [platform.deepseek.com](https://platform.deepseek.com) |
+| `groq` | LLM + **语音转录**（Whisper） | [console.groq.com](https://console.groq.com) |
+| `gemini` | LLM（直接访问 Gemini） | [aistudio.google.com](https://aistudio.google.com) |
+| `aihubmix` | LLM（API 网关，访问所有模型） | [aihubmix.com](https://aihubmix.com) |
+| `dashscope` | LLM（Qwen） | [dashscope.console.aliyun.com](https://dashscope.console.aliyun.com) |
+| `moonshot` | LLM（Moonshot/Kimi） | [platform.moonshot.cn](https://platform.moonshot.cn) |
+| `zhipu` | LLM（智谱 GLM） | [open.bigmodel.cn](https://open.bigmodel.cn) |
+| `vllm` | LLM（本地，任何兼容 OpenAI 的服务器） | — |
 
 <details>
-<summary><b>Adding a New Provider (Developer Guide)</b></summary>
+<summary><b>添加新 Provider（开发者指南）</b></summary>
 
-nanobot uses a **Provider Registry** (`nanobot/providers/registry.py`) as the single source of truth.
-Adding a new provider only takes **2 steps** — no if-elif chains to touch.
+nanobot 使用 **Provider Registry** (`nanobot/providers/registry.py`) 作为单一数据源。
+添加新 provider 只需 **2 个步骤** —— 无需修改 if-elif 链。
 
-**Step 1.** Add a `ProviderSpec` entry to `PROVIDERS` in `nanobot/providers/registry.py`:
+**步骤 1.** 在 `nanobot/providers/registry.py` 中的 `PROVIDERS` 添加 `ProviderSpec` 条目：
 
 ```python
 ProviderSpec(
-    name="myprovider",                   # config field name
-    keywords=("myprovider", "mymodel"),  # model-name keywords for auto-matching
-    env_key="MYPROVIDER_API_KEY",        # env var for LiteLLM
-    display_name="My Provider",          # shown in `nanobot status`
-    litellm_prefix="myprovider",         # auto-prefix: model → myprovider/model
-    skip_prefixes=("myprovider/",),      # don't double-prefix
+    name="myprovider",                   # 配置字段名
+    keywords=("myprovider", "mymodel"),  # 用于自动匹配的模型名称关键字
+    env_key="MYPROVIDER_API_KEY",        # LiteLLM 的环境变量
+    display_name="My Provider",          # 在 `nanobot status` 中显示
+    litellm_prefix="myprovider",         # 自动前缀: model → myprovider/model
+    skip_prefixes=("myprovider/",),      # 不要双重前缀
 )
 ```
 
-**Step 2.** Add a field to `ProvidersConfig` in `nanobot/config/schema.py`:
+**步骤 2.** 在 `nanobot/config/schema.py` 中的 `ProvidersConfig` 添加字段：
 
 ```python
 class ProvidersConfig(BaseModel):
@@ -387,59 +387,59 @@ class ProvidersConfig(BaseModel):
     myprovider: ProviderConfig = ProviderConfig()
 ```
 
-That's it! Environment variables, model prefixing, config matching, and `nanobot status` display will all work automatically.
+就是这样！环境变量、模型前缀、配置匹配和 `nanobot status` 显示都将自动工作。
 
-**Common `ProviderSpec` options:**
+**常见 `ProviderSpec` 选项：**
 
-| Field | Description | Example |
+| 字段 | 描述 | 示例 |
 |-------|-------------|---------|
-| `litellm_prefix` | Auto-prefix model names for LiteLLM | `"dashscope"` → `dashscope/qwen-max` |
-| `skip_prefixes` | Don't prefix if model already starts with these | `("dashscope/", "openrouter/")` |
-| `env_extras` | Additional env vars to set | `(("ZHIPUAI_API_KEY", "{api_key}"),)` |
-| `model_overrides` | Per-model parameter overrides | `(("kimi-k2.5", {"temperature": 1.0}),)` |
-| `is_gateway` | Can route any model (like OpenRouter) | `True` |
-| `detect_by_key_prefix` | Detect gateway by API key prefix | `"sk-or-"` |
-| `detect_by_base_keyword` | Detect gateway by API base URL | `"openrouter"` |
-| `strip_model_prefix` | Strip existing prefix before re-prefixing | `True` (for AiHubMix) |
+| `litellm_prefix` | 为 LiteLLM 自动添加模型名称前缀 | `"dashscope"` → `dashscope/qwen-max` |
+| `skip_prefixes` | 如果模型已经以这些开头，则不要添加前缀 | `("dashscope/", "openrouter/")` |
+| `env_extras` | 要设置的额外环境变量 | `(("ZHIPUAI_API_KEY", "{api_key}"),)` |
+| `model_overrides` | 按模型参数覆盖 | `(("kimi-k2.5", {"temperature": 1.0}),)` |
+| `is_gateway` | 可以路由任何模型（如 OpenRouter） | `True` |
+| `detect_by_key_prefix` | 通过 API 密钥前缀检测网关 | `"sk-or-"` |
+| `detect_by_base_keyword` | 通过 API 基础 URL 检测网关 | `"openrouter"` |
+| `strip_model_prefix` | 在重新添加前缀之前去除现有前缀 | `True`（对于 AiHubMix） |
 
 </details>
 
 
-### Security
+### 安全
 
 > [!TIP]
-> For production deployments, set `"restrictToWorkspace": true` in your config to sandbox the agent.
+> 对于生产部署，在配置中设置 `"restrictToWorkspace": true` 以沙箱化智能体。
 
-| Option | Default | Description |
+| 选项 | 默认值 | 描述 |
 |--------|---------|-------------|
-| `tools.restrictToWorkspace` | `false` | When `true`, restricts **all** agent tools (shell, file read/write/edit, list) to the workspace directory. Prevents path traversal and out-of-scope access. |
-| `channels.*.allowFrom` | `[]` (allow all) | Whitelist of user IDs. Empty = allow everyone; non-empty = only listed users can interact. |
+| `tools.restrictToWorkspace` | `false` | 当设置为 `true` 时，将**所有**智能体工具（shell、文件读写/编辑、列表）限制在工作区目录中。防止路径遍历和超出范围的访问。 |
+| `channels.*.allowFrom` | `[]`（允许所有） | 用户 ID 白名单。空 = 允许所有人；非空 = 仅列出的用户可以交互。 |
 
 
-## CLI Reference
+## CLI 参考
 
-| Command | Description |
+| 命令 | 描述 |
 |---------|-------------|
-| `nanobot onboard` | Initialize config & workspace |
-| `nanobot agent -m "..."` | Chat with the agent |
-| `nanobot agent` | Interactive chat mode |
-| `nanobot gateway` | Start the gateway |
-| `nanobot status` | Show status |
-| `nanobot channels login` | Link WhatsApp (scan QR) |
-| `nanobot channels status` | Show channel status |
+| `nanobot onboard` | 初始化配置和工作区 |
+| `nanobot agent -m "..."` | 与智能体聊天 |
+| `nanobot agent` | 交互式聊天模式 |
+| `nanobot gateway` | 启动网关 |
+| `nanobot status` | 显示状态 |
+| `nanobot channels login` | 链接 WhatsApp（扫描二维码） |
+| `nanobot channels status` | 显示通道状态 |
 
 <details>
-<summary><b>Scheduled Tasks (Cron)</b></summary>
+<summary><b>定时任务（Cron）</b></summary>
 
 ```bash
-# Add a job
+# 添加任务
 nanobot cron add --name "daily" --message "Good morning!" --cron "0 9 * * *"
 nanobot cron add --name "hourly" --message "Check status" --every 3600
 
-# List jobs
+# 列出任务
 nanobot cron list
 
-# Remove a job
+# 删除任务
 nanobot cron remove <job_id>
 ```
 
@@ -448,71 +448,71 @@ nanobot cron remove <job_id>
 ## 🐳 Docker
 
 > [!TIP]
-> The `-v ~/.nanobot:/root/.nanobot` flag mounts your local config directory into the container, so your config and workspace persist across container restarts.
+> `-v ~/.nanobot:/root/.nanobot` 标志将本地配置目录挂载到容器中，因此您的配置和工作区在容器重启后会持久化。
 
-Build and run nanobot in a container:
+在容器中构建和运行 nanobot：
 
 ```bash
-# Build the image
+# 构建镜像
 docker build -t nanobot .
 
-# Initialize config (first time only)
+# 初始化配置（首次使用）
 docker run -v ~/.nanobot:/root/.nanobot --rm nanobot onboard
 
-# Edit config on host to add API keys
+# 在主机上编辑配置以添加 API 密钥
 vim ~/.nanobot/config.json
 
-# Run gateway (connects to Telegram/WhatsApp)
+# 运行网关（连接到 Telegram/WhatsApp）
 docker run -v ~/.nanobot:/root/.nanobot -p 18790:18790 nanobot gateway
 
-# Or run a single command
+# 或运行单个命令
 docker run -v ~/.nanobot:/root/.nanobot --rm nanobot agent -m "Hello!"
 docker run -v ~/.nanobot:/root/.nanobot --rm nanobot status
 ```
 
-## 📁 Project Structure
+## 📁 项目结构
 
 ```
 nanobot/
-├── agent/          # 🧠 Core agent logic
-│   ├── loop.py     #    Agent loop (LLM ↔ tool execution)
-│   ├── context.py  #    Prompt builder
-│   ├── memory.py   #    Persistent memory
-│   ├── skills.py   #    Skills loader
-│   ├── subagent.py #    Background task execution
-│   └── tools/      #    Built-in tools (incl. spawn)
-├── skills/         # 🎯 Bundled skills (github, weather, tmux...)
-├── channels/       # 📱 WhatsApp integration
-├── bus/            # 🚌 Message routing
-├── cron/           # ⏰ Scheduled tasks
-├── heartbeat/      # 💓 Proactive wake-up
-├── providers/      # 🤖 LLM providers (OpenRouter, etc.)
-├── session/        # 💬 Conversation sessions
-├── config/         # ⚙️ Configuration
-└── cli/            # 🖥️ Commands
+├── agent/          # 🧠 核心智能体逻辑
+│   ├── loop.py     #    智能体循环（LLM ↔ 工具执行）
+│   ├── context.py  #    提示构建器
+│   ├── memory.py   #    持久内存
+│   ├── skills.py   #    技能加载器
+│   ├── subagent.py #    后台任务执行
+│   └── tools/      #    内置工具（包括 spawn）
+├── skills/         # 🎯 捆绑技能（github, weather, tmux...）
+├── channels/       # 📱 WhatsApp 集成
+├── bus/            # 🚌 消息路由
+├── cron/           # ⏰ 定时任务
+├── heartbeat/      # 💓 主动唤醒
+├── providers/      # 🤖 LLM 提供商（OpenRouter 等）
+├── session/        # 💬 对话会话
+├── config/         # ⚙️ 配置
+└── cli/            # 🖥️ 命令
 ```
 
-## 🤝 Contribute & Roadmap
+## 🤝 贡献与路线图
 
-PRs welcome! The codebase is intentionally small and readable. 🤗
+欢迎提交 PR！代码库故意保持小巧且可读。🤗
 
-**Roadmap** — Pick an item and [open a PR](https://github.com/HKUDS/nanobot/pulls)!
+**路线图** — 选择一个项目并 [创建 PR](https://github.com/HKUDS/nanobot/pulls)！
 
-- [x] **Voice Transcription** — Support for Groq Whisper (Issue #13)
-- [ ] **Multi-modal** — See and hear (images, voice, video)
-- [ ] **Long-term memory** — Never forget important context
-- [ ] **Better reasoning** — Multi-step planning and reflection
-- [ ] **More integrations** — Discord, Slack, email, calendar
-- [ ] **Self-improvement** — Learn from feedback and mistakes
+- [x] **语音转录** — 支持 Groq Whisper（Issue #13）
+- [ ] **多模态** — 看和听（图像、语音、视频）
+- [ ] **长期记忆** — 永远不会忘记重要上下文
+- [ ] **更好的推理** — 多步规划和反思
+- [ ] **更多集成** — Discord、Slack、电子邮件、日历
+- [ ] **自我改进** — 从反馈和错误中学习
 
-### Contributors
+### 贡献者
 
 <a href="https://github.com/HKUDS/nanobot/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=HKUDS/nanobot&max=100&columns=12" />
 </a>
 
 
-## ⭐ Star History
+## ⭐ Star 历史
 
 <div align="center">
   <a href="https://star-history.com/#HKUDS/nanobot&Date">
@@ -525,11 +525,11 @@ PRs welcome! The codebase is intentionally small and readable. 🤗
 </div>
 
 <p align="center">
-  <em> Thanks for visiting ✨ nanobot!</em><br><br>
+  <em> 感谢访问 ✨ nanobot！</em><br><br>
   <img src="https://visitor-badge.laobi.icu/badge?page_id=HKUDS.nanobot&style=for-the-badge&color=00d4ff" alt="Views">
 </p>
 
 
 <p align="center">
-  <sub>nanobot is for educational, research, and technical exchange purposes only</sub>
+  <sub>nanobot 仅用于教育、研究和技术交流目的</sub>
 </p>
