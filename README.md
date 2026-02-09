@@ -164,6 +164,64 @@ nanobot agent -m "Hello from my local LLM!"
 > [!TIP]
 > 对于不需要身份验证的本地服务器，`apiKey` 可以是任何非空字符串。
 
+## 🖥️ 本地模型 (Ollama)
+
+使用 Ollama 运行您自己的本地模型。
+
+**1. 启动 Ollama 服务**
+
+```bash
+# 确保 Ollama 服务已安装并运行
+# 在 macOS/Linux 上：
+ollama serve
+
+# 或在 Windows 上：
+# 启动 Ollama 应用程序
+```
+
+**2. 拉取模型**
+
+```bash
+# 拉取 Llama 3.1 模型
+ollama pull llama3.1
+
+# 或拉取其他模型
+# ollama pull gemma2
+# ollama pull mistral
+```
+
+**3. 配置** (`~/.nanobot/config.json`)
+
+```json
+{
+  "providers": {
+    "vllm": {
+      "apiKey": "dummy",
+      "apiBase": "http://localhost:11434/v1"
+    }
+  },
+  "agents": {
+    "defaults": {
+      "model": "llama3.1"
+    }
+  }
+}
+```
+
+**4. 聊天**
+
+```bash
+nanobot agent -m "Hello from my local Ollama!"
+```
+
+> [!TIP]
+> - Ollama 默认服务地址为 `http://localhost:11434`
+> - `apiKey` 可以是任何非空字符串，因为 Ollama 本地服务不需要身份验证
+> - 您可以使用任何已安装的 Ollama 模型，只需在配置中更改 `model` 字段
+> - 如果 Ollama 服务运行在不同端口，需要相应修改 `apiBase` 中的端口号
+> - Ollama 使用 OpenAI 兼容的 API，因此可以使用 `vllm` 提供商配置
+
+
 ## 💬 聊天应用
 
 通过 Telegram、Discord、WhatsApp 或飞书与您的 nanobot 交流 —— 随时随地。
