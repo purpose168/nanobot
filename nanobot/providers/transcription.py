@@ -1,4 +1,4 @@
-"""Voice transcription provider using Groq."""
+"""使用 Groq 的语音转录提供商。"""
 
 import os
 from pathlib import Path
@@ -10,9 +10,9 @@ from loguru import logger
 
 class GroqTranscriptionProvider:
     """
-    Voice transcription provider using Groq's Whisper API.
+    使用 Groq 的 Whisper API 的语音转录提供商。
     
-    Groq offers extremely fast transcription with a generous free tier.
+    Groq 提供极其快速的转录服务，并有慷慨的免费层级。
     """
     
     def __init__(self, api_key: str | None = None):
@@ -21,21 +21,21 @@ class GroqTranscriptionProvider:
     
     async def transcribe(self, file_path: str | Path) -> str:
         """
-        Transcribe an audio file using Groq.
+        使用 Groq 转录音频文件。
         
         Args:
-            file_path: Path to the audio file.
+            file_path: 音频文件的路径。
             
         Returns:
-            Transcribed text.
+            转录的文本。
         """
         if not self.api_key:
-            logger.warning("Groq API key not configured for transcription")
+            logger.warning("未配置用于转录的 Groq API 密钥")
             return ""
         
         path = Path(file_path)
         if not path.exists():
-            logger.error(f"Audio file not found: {file_path}")
+            logger.error(f"未找到音频文件：{file_path}")
             return ""
         
         try:
@@ -61,5 +61,5 @@ class GroqTranscriptionProvider:
                     return data.get("text", "")
                     
         except Exception as e:
-            logger.error(f"Groq transcription error: {e}")
+            logger.error(f"Groq 转录错误：{e}")
             return ""

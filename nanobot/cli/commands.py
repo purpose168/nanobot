@@ -1,4 +1,4 @@
-"""CLI commands for nanobot."""
+"""nanobot 的 CLI 命令。"""
 
 import asyncio
 from pathlib import Path
@@ -11,7 +11,7 @@ from nanobot import __version__, __logo__
 
 app = typer.Typer(
     name="nanobot",
-    help=f"{__logo__} nanobot - Personal AI Assistant",
+    help=f"{__logo__} nanobot - 个人 AI 助手",
     no_args_is_help=True,
 )
 
@@ -30,7 +30,7 @@ def main(
         None, "--version", "-v", callback=version_callback, is_eager=True
     ),
 ):
-    """nanobot - Personal AI Assistant."""
+    """nanobot - 个人 AI 助手。"""
     pass
 
 
@@ -41,7 +41,7 @@ def main(
 
 @app.command()
 def onboard():
-    """Initialize nanobot configuration and workspace."""
+    """初始化 nanobot 配置和工作空间。"""
     from nanobot.config.loader import get_config_path, save_config
     from nanobot.config.schema import Config
     from nanobot.utils.helpers import get_workspace_path
@@ -49,71 +49,69 @@ def onboard():
     config_path = get_config_path()
     
     if config_path.exists():
-        console.print(f"[yellow]Config already exists at {config_path}[/yellow]")
-        if not typer.confirm("Overwrite?"):
+        console.print(f"[yellow]配置已存在于 {config_path}[/yellow]")
+        if not typer.confirm("覆盖？"):
             raise typer.Exit()
     
-    # Create default config
+    # 创建默认配置
     config = Config()
     save_config(config)
-    console.print(f"[green]✓[/green] Created config at {config_path}")
+    console.print(f"[green]✓[/green] 已在 {config_path} 创建配置")
     
-    # Create workspace
+    # 创建工作空间
     workspace = get_workspace_path()
-    console.print(f"[green]✓[/green] Created workspace at {workspace}")
+    console.print(f"[green]✓[/green] 已在 {workspace} 创建工作空间")
     
-    # Create default bootstrap files
+    # 创建默认引导文件
     _create_workspace_templates(workspace)
     
-    console.print(f"\n{__logo__} nanobot is ready!")
-    console.print("\nNext steps:")
-    console.print("  1. Add your API key to [cyan]~/.nanobot/config.json[/cyan]")
-    console.print("     Get one at: https://openrouter.ai/keys")
-    console.print("  2. Chat: [cyan]nanobot agent -m \"Hello!\"[/cyan]")
-    console.print("\n[dim]Want Telegram/WhatsApp? See: https://github.com/HKUDS/nanobot#-chat-apps[/dim]")
-
-
+    console.print(f"\n{__logo__} nanobot 已就绪！")
+    console.print("\n后续步骤：")
+    console.print("  1. 将您的 API 密钥添加到 [cyan]~/.nanobot/config.json[/cyan]")
+    console.print("     在以下位置获取一个：https://openrouter.ai/keys")
+    console.print("  2. 聊天：[cyan]nanobot agent -m \"你好！\"[/cyan]")
+    console.print("\n[dim]想要 Telegram/WhatsApp？请参阅：https://github.com/HKUDS/nanobot#-chat-apps[/dim]")
 
 
 def _create_workspace_templates(workspace: Path):
-    """Create default workspace template files."""
+    """创建默认工作空间模板文件。"""
     templates = {
         "AGENTS.md": """# Agent Instructions
 
-You are a helpful AI assistant. Be concise, accurate, and friendly.
+您是一个有用的 AI 助手。简洁、准确且友好。
 
-## Guidelines
+## 指南
 
-- Always explain what you're doing before taking actions
-- Ask for clarification when the request is ambiguous
-- Use tools to help accomplish tasks
-- Remember important information in your memory files
+- 在采取行动之前始终解释您在做什么
+- 当请求模棱两可时，请求澄清
+- 使用工具来帮助完成任务
+- 将重要信息记住在您的记忆文件中
 """,
-        "SOUL.md": """# Soul
+        "SOUL.md": """# 灵魂
 
-I am nanobot, a lightweight AI assistant.
+我是 nanobot，一个轻量级 AI 助手。
 
-## Personality
+## 个性
 
-- Helpful and friendly
-- Concise and to the point
-- Curious and eager to learn
+- 有用且友好
+- 简洁且切中要害
+- 好奇且渴望学习
 
-## Values
+## 价值观
 
-- Accuracy over speed
-- User privacy and safety
-- Transparency in actions
+- 准确性优于速度
+- 用户隐私和安全
+- 行动透明
 """,
-        "USER.md": """# User
+        "USER.md": """# 用户
 
-Information about the user goes here.
+关于用户的信息放在这里。
 
-## Preferences
+## 偏好
 
-- Communication style: (casual/formal)
-- Timezone: (your timezone)
-- Language: (your preferred language)
+- 沟通风格：（随意/正式）
+- 时区：（您的时区）
+- 语言：（您偏好的语言）
 """,
     }
     
@@ -121,40 +119,40 @@ Information about the user goes here.
         file_path = workspace / filename
         if not file_path.exists():
             file_path.write_text(content)
-            console.print(f"  [dim]Created {filename}[/dim]")
+            console.print(f"  [dim]已创建 {filename}[/dim]")
     
-    # Create memory directory and MEMORY.md
+    # 创建记忆目录和 MEMORY.md
     memory_dir = workspace / "memory"
     memory_dir.mkdir(exist_ok=True)
     memory_file = memory_dir / "MEMORY.md"
     if not memory_file.exists():
-        memory_file.write_text("""# Long-term Memory
+        memory_file.write_text("""# 长期记忆
 
-This file stores important information that should persist across sessions.
+此文件存储应该跨会话持久化的重要信息。
 
-## User Information
+## 用户信息
 
-(Important facts about the user)
+（关于用户的重要事实）
 
-## Preferences
+## 偏好
 
-(User preferences learned over time)
+（随时间学习的用户偏好）
 
-## Important Notes
+## 重要笔记
 
-(Things to remember)
+（要记住的事情）
 """)
-        console.print("  [dim]Created memory/MEMORY.md[/dim]")
+        console.print("  [dim]已创建 memory/MEMORY.md[/dim]")
 
 
 def _make_provider(config):
-    """Create LiteLLMProvider from config. Exits if no API key found."""
+    """从配置创建 LiteLLMProvider。如果未找到 API 密钥则退出。"""
     from nanobot.providers.litellm_provider import LiteLLMProvider
     p = config.get_provider()
     model = config.agents.defaults.model
     if not (p and p.api_key) and not model.startswith("bedrock/"):
-        console.print("[red]Error: No API key configured.[/red]")
-        console.print("Set one in ~/.nanobot/config.json under providers section")
+        console.print("[red]错误：未配置 API 密钥。[/red]")
+        console.print("在 ~/.nanobot/config.json 的 providers 部分下设置一个")
         raise typer.Exit(1)
     return LiteLLMProvider(
         api_key=p.api_key if p else None,
@@ -171,10 +169,10 @@ def _make_provider(config):
 
 @app.command()
 def gateway(
-    port: int = typer.Option(18790, "--port", "-p", help="Gateway port"),
-    verbose: bool = typer.Option(False, "--verbose", "-v", help="Verbose output"),
+    port: int = typer.Option(18790, "--port", "-p", help="网关端口"),
+    verbose: bool = typer.Option(False, "--verbose", "-v", help="详细输出"),
 ):
-    """Start the nanobot gateway."""
+    """启动 nanobot 网关。"""
     from nanobot.config.loader import load_config, get_data_dir
     from nanobot.bus.queue import MessageBus
     from nanobot.agent.loop import AgentLoop
@@ -188,18 +186,18 @@ def gateway(
         import logging
         logging.basicConfig(level=logging.DEBUG)
     
-    console.print(f"{__logo__} Starting nanobot gateway on port {port}...")
+    console.print(f"{__logo__} 正在端口 {port} 上启动 nanobot 网关...")
     
     config = load_config()
     bus = MessageBus()
     provider = _make_provider(config)
     session_manager = SessionManager(config.workspace_path)
     
-    # Create cron service first (callback set after agent creation)
+    # 首先创建 cron 服务（在智能体创建后设置回调）
     cron_store_path = get_data_dir() / "cron" / "jobs.json"
     cron = CronService(cron_store_path)
     
-    # Create agent with cron service
+    # 创建带有 cron 服务的智能体
     agent = AgentLoop(
         bus=bus,
         provider=provider,
@@ -213,9 +211,9 @@ def gateway(
         session_manager=session_manager,
     )
     
-    # Set cron callback (needs agent)
+    # 设置 cron 回调（需要智能体）
     async def on_cron_job(job: CronJob) -> str | None:
-        """Execute a cron job through the agent."""
+        """通过智能体执行 cron 作业。"""
         response = await agent.process_direct(
             job.payload.message,
             session_key=f"cron:{job.id}",
@@ -232,31 +230,31 @@ def gateway(
         return response
     cron.on_job = on_cron_job
     
-    # Create heartbeat service
+    # 创建心跳服务
     async def on_heartbeat(prompt: str) -> str:
-        """Execute heartbeat through the agent."""
+        """通过智能体执行心跳。"""
         return await agent.process_direct(prompt, session_key="heartbeat")
     
     heartbeat = HeartbeatService(
         workspace=config.workspace_path,
         on_heartbeat=on_heartbeat,
-        interval_s=30 * 60,  # 30 minutes
+        interval_s=30 * 60,  # 30 分钟
         enabled=True
     )
     
-    # Create channel manager
+    # 创建通道管理器
     channels = ChannelManager(config, bus, session_manager=session_manager)
     
     if channels.enabled_channels:
-        console.print(f"[green]✓[/green] Channels enabled: {', '.join(channels.enabled_channels)}")
+        console.print(f"[green]✓[/green] 已启用通道：{', '.join(channels.enabled_channels)}")
     else:
-        console.print("[yellow]Warning: No channels enabled[/yellow]")
+        console.print("[yellow]警告：未启用任何通道[/yellow]")
     
     cron_status = cron.status()
     if cron_status["jobs"] > 0:
-        console.print(f"[green]✓[/green] Cron: {cron_status['jobs']} scheduled jobs")
+        console.print(f"[green]✓[/green] Cron：{cron_status['jobs']} 个已调度的作业")
     
-    console.print(f"[green]✓[/green] Heartbeat: every 30m")
+    console.print(f"[green]✓[/green] 心跳：每 30 分钟")
     
     async def run():
         try:
@@ -267,15 +265,13 @@ def gateway(
                 channels.start_all(),
             )
         except KeyboardInterrupt:
-            console.print("\nShutting down...")
+            console.print("\n正在关闭...")
             heartbeat.stop()
             cron.stop()
             agent.stop()
             await channels.stop_all()
     
     asyncio.run(run())
-
-
 
 
 # ============================================================================
@@ -285,10 +281,10 @@ def gateway(
 
 @app.command()
 def agent(
-    message: str = typer.Option(None, "--message", "-m", help="Message to send to the agent"),
-    session_id: str = typer.Option("cli:default", "--session", "-s", help="Session ID"),
+    message: str = typer.Option(None, "--message", "-m", help="发送给智能体的消息"),
+    session_id: str = typer.Option("cli:default", "--session", "-s", help="会话 ID"),
 ):
-    """Interact with the agent directly."""
+    """直接与智能体交互。"""
     from nanobot.config.loader import load_config
     from nanobot.bus.queue import MessageBus
     from nanobot.agent.loop import AgentLoop
@@ -308,27 +304,27 @@ def agent(
     )
     
     if message:
-        # Single message mode
+        # 单条消息模式
         async def run_once():
             response = await agent_loop.process_direct(message, session_id)
             console.print(f"\n{__logo__} {response}")
         
         asyncio.run(run_once())
     else:
-        # Interactive mode
-        console.print(f"{__logo__} Interactive mode (Ctrl+C to exit)\n")
+        # 交互模式
+        console.print(f"{__logo__} 交互模式（Ctrl+C 退出）\n")
         
         async def run_interactive():
             while True:
                 try:
-                    user_input = console.input("[bold blue]You:[/bold blue] ")
+                    user_input = console.input("[bold blue]您：[/bold blue] ")
                     if not user_input.strip():
                         continue
                     
                     response = await agent_loop.process_direct(user_input, session_id)
                     console.print(f"\n{__logo__} {response}\n")
                 except KeyboardInterrupt:
-                    console.print("\nGoodbye!")
+                    console.print("\n再见！")
                     break
         
         asyncio.run(run_interactive())
@@ -339,13 +335,13 @@ def agent(
 # ============================================================================
 
 
-channels_app = typer.Typer(help="Manage channels")
+channels_app = typer.Typer(help="管理通道")
 app.add_typer(channels_app, name="channels")
 
 
 @channels_app.command("status")
 def channels_status():
-    """Show channel status."""
+    """显示通道状态。"""
     from nanobot.config.loader import load_config
 
     config = load_config()
@@ -383,25 +379,25 @@ def channels_status():
 
 
 def _get_bridge_dir() -> Path:
-    """Get the bridge directory, setting it up if needed."""
+    """获取桥接目录，如果需要则进行设置。"""
     import shutil
     import subprocess
     
-    # User's bridge location
+    # 用户的桥接位置
     user_bridge = Path.home() / ".nanobot" / "bridge"
     
-    # Check if already built
+    # 检查是否已构建
     if (user_bridge / "dist" / "index.js").exists():
         return user_bridge
     
-    # Check for npm
+    # 检查 npm
     if not shutil.which("npm"):
-        console.print("[red]npm not found. Please install Node.js >= 18.[/red]")
+        console.print("[red]未找到 npm。请安装 Node.js >= 18。[/red]")
         raise typer.Exit(1)
     
-    # Find source bridge: first check package data, then source dir
-    pkg_bridge = Path(__file__).parent.parent / "bridge"  # nanobot/bridge (installed)
-    src_bridge = Path(__file__).parent.parent.parent / "bridge"  # repo root/bridge (dev)
+    # 查找源桥接：首先检查包数据，然后检查源目录
+    pkg_bridge = Path(__file__).parent.parent / "bridge"  # nanobot/bridge (已安装）
+    src_bridge = Path(__file__).parent.parent.parent / "bridge"  # 仓库根目录/bridge (开发）
     
     source = None
     if (pkg_bridge / "package.json").exists():
@@ -410,29 +406,29 @@ def _get_bridge_dir() -> Path:
         source = src_bridge
     
     if not source:
-        console.print("[red]Bridge source not found.[/red]")
-        console.print("Try reinstalling: pip install --force-reinstall nanobot")
+        console.print("[red]未找到桥接源。[/red]")
+        console.print("尝试重新安装：pip install --force-reinstall nanobot")
         raise typer.Exit(1)
     
-    console.print(f"{__logo__} Setting up bridge...")
+    console.print(f"{__logo__} 正在设置桥接...")
     
-    # Copy to user directory
+    # 复制到用户目录
     user_bridge.parent.mkdir(parents=True, exist_ok=True)
     if user_bridge.exists():
         shutil.rmtree(user_bridge)
     shutil.copytree(source, user_bridge, ignore=shutil.ignore_patterns("node_modules", "dist"))
     
-    # Install and build
+    # 安装和构建
     try:
-        console.print("  Installing dependencies...")
+        console.print("  正在安装依赖...")
         subprocess.run(["npm", "install"], cwd=user_bridge, check=True, capture_output=True)
         
-        console.print("  Building...")
+        console.print("  正在构建...")
         subprocess.run(["npm", "run", "build"], cwd=user_bridge, check=True, capture_output=True)
         
-        console.print("[green]✓[/green] Bridge ready\n")
+        console.print("[green]✓[/green] 桥接已就绪\n")
     except subprocess.CalledProcessError as e:
-        console.print(f"[red]Build failed: {e}[/red]")
+        console.print(f"[red]构建失败：{e}[/red]")
         if e.stderr:
             console.print(f"[dim]{e.stderr.decode()[:500]}[/dim]")
         raise typer.Exit(1)
@@ -442,35 +438,35 @@ def _get_bridge_dir() -> Path:
 
 @channels_app.command("login")
 def channels_login():
-    """Link device via QR code."""
+    """通过 QR 码链接设备。"""
     import subprocess
     
     bridge_dir = _get_bridge_dir()
     
-    console.print(f"{__logo__} Starting bridge...")
-    console.print("Scan the QR code to connect.\n")
+    console.print(f"{__logo__} 正在启动桥接...")
+    console.print("扫描 QR 码以连接。\n")
     
     try:
         subprocess.run(["npm", "start"], cwd=bridge_dir, check=True)
     except subprocess.CalledProcessError as e:
-        console.print(f"[red]Bridge failed: {e}[/red]")
+        console.print(f"[red]桥接失败：{e}[/red]")
     except FileNotFoundError:
-        console.print("[red]npm not found. Please install Node.js.[/red]")
+        console.print("[red]未找到 npm。请安装 Node.js。[/red]")
 
 
 # ============================================================================
 # Cron Commands
 # ============================================================================
 
-cron_app = typer.Typer(help="Manage scheduled tasks")
+cron_app = typer.Typer(help="管理已调度的任务")
 app.add_typer(cron_app, name="cron")
 
 
 @cron_app.command("list")
 def cron_list(
-    all: bool = typer.Option(False, "--all", "-a", help="Include disabled jobs"),
+    all: bool = typer.Option(False, "--all", "-a", help="包含已禁用的作业"),
 ):
-    """List scheduled jobs."""
+    """列出已调度的作业。"""
     from nanobot.config.loader import get_data_dir
     from nanobot.cron.service import CronService
     
@@ -480,7 +476,7 @@ def cron_list(
     jobs = service.list_jobs(include_disabled=all)
     
     if not jobs:
-        console.print("No scheduled jobs.")
+        console.print("没有已调度的作业。")
         return
     
     table = Table(title="Scheduled Jobs")
@@ -492,21 +488,21 @@ def cron_list(
     
     import time
     for job in jobs:
-        # Format schedule
+        # 格式化调度
         if job.schedule.kind == "every":
-            sched = f"every {(job.schedule.every_ms or 0) // 1000}s"
+            sched = f"每 {(job.schedule.every_ms or 0) // 1000}秒"
         elif job.schedule.kind == "cron":
             sched = job.schedule.expr or ""
         else:
-            sched = "one-time"
+            sched = "一次性"
         
-        # Format next run
+        # 格式化下次运行
         next_run = ""
         if job.state.next_run_at_ms:
             next_time = time.strftime("%Y-%m-%d %H:%M", time.localtime(job.state.next_run_at_ms / 1000))
             next_run = next_time
         
-        status = "[green]enabled[/green]" if job.enabled else "[dim]disabled[/dim]"
+        status = "[green]已启用[/green]" if job.enabled else "[dim]已禁用[/dim]"
         
         table.add_row(job.id, job.name, sched, status, next_run)
     
@@ -515,21 +511,21 @@ def cron_list(
 
 @cron_app.command("add")
 def cron_add(
-    name: str = typer.Option(..., "--name", "-n", help="Job name"),
-    message: str = typer.Option(..., "--message", "-m", help="Message for agent"),
-    every: int = typer.Option(None, "--every", "-e", help="Run every N seconds"),
-    cron_expr: str = typer.Option(None, "--cron", "-c", help="Cron expression (e.g. '0 9 * * *')"),
-    at: str = typer.Option(None, "--at", help="Run once at time (ISO format)"),
-    deliver: bool = typer.Option(False, "--deliver", "-d", help="Deliver response to channel"),
-    to: str = typer.Option(None, "--to", help="Recipient for delivery"),
-    channel: str = typer.Option(None, "--channel", help="Channel for delivery (e.g. 'telegram', 'whatsapp')"),
+    name: str = typer.Option(..., "--name", "-n", help="作业名称"),
+    message: str = typer.Option(..., "--message", "-m", help="智能体的消息"),
+    every: int = typer.Option(None, "--every", "-e", help="每 N 秒运行一次"),
+    cron_expr: str = typer.Option(None, "--cron", "-c", help="Cron 表达式（例如 '0 9 * * *'）"),
+    at: str = typer.Option(None, "--at", help="在指定时间运行一次（ISO 格式）"),
+    deliver: bool = typer.Option(False, "--deliver", "-d", help="将响应传递到通道"),
+    to: str = typer.Option(None, "--to", help="传递的接收者"),
+    channel: str = typer.Option(None, "--channel", help="传递的通道（例如 'telegram'、'whatsapp'）"),
 ):
-    """Add a scheduled job."""
+    """添加已调度的作业。"""
     from nanobot.config.loader import get_data_dir
     from nanobot.cron.service import CronService
     from nanobot.cron.types import CronSchedule
     
-    # Determine schedule type
+    # 确定调度类型
     if every:
         schedule = CronSchedule(kind="every", every_ms=every * 1000)
     elif cron_expr:
@@ -539,7 +535,7 @@ def cron_add(
         dt = datetime.datetime.fromisoformat(at)
         schedule = CronSchedule(kind="at", at_ms=int(dt.timestamp() * 1000))
     else:
-        console.print("[red]Error: Must specify --every, --cron, or --at[/red]")
+        console.print("[red]错误：必须指定 --every、--cron 或 --at[/red]")
         raise typer.Exit(1)
     
     store_path = get_data_dir() / "cron" / "jobs.json"
@@ -554,14 +550,14 @@ def cron_add(
         channel=channel,
     )
     
-    console.print(f"[green]✓[/green] Added job '{job.name}' ({job.id})")
+    console.print(f"[green]✓[/green] 已添加作业 '{job.name}' ({job.id})")
 
 
 @cron_app.command("remove")
 def cron_remove(
-    job_id: str = typer.Argument(..., help="Job ID to remove"),
+    job_id: str = typer.Argument(..., help="要移除的作业 ID"),
 ):
-    """Remove a scheduled job."""
+    """移除已调度的作业。"""
     from nanobot.config.loader import get_data_dir
     from nanobot.cron.service import CronService
     
@@ -569,17 +565,17 @@ def cron_remove(
     service = CronService(store_path)
     
     if service.remove_job(job_id):
-        console.print(f"[green]✓[/green] Removed job {job_id}")
+        console.print(f"[green]✓[/green] 已移除作业 {job_id}")
     else:
-        console.print(f"[red]Job {job_id} not found[/red]")
+        console.print(f"[red]未找到作业 {job_id}[/red]")
 
 
 @cron_app.command("enable")
 def cron_enable(
-    job_id: str = typer.Argument(..., help="Job ID"),
-    disable: bool = typer.Option(False, "--disable", help="Disable instead of enable"),
+    job_id: str = typer.Argument(..., help="作业 ID"),
+    disable: bool = typer.Option(False, "--disable", help="禁用而不是启用"),
 ):
-    """Enable or disable a job."""
+    """启用或禁用作业。"""
     from nanobot.config.loader import get_data_dir
     from nanobot.cron.service import CronService
     
@@ -588,18 +584,18 @@ def cron_enable(
     
     job = service.enable_job(job_id, enabled=not disable)
     if job:
-        status = "disabled" if disable else "enabled"
-        console.print(f"[green]✓[/green] Job '{job.name}' {status}")
+        status = "已禁用" if disable else "已启用"
+        console.print(f"[green]✓[/green] 作业 '{job.name}' {status}")
     else:
-        console.print(f"[red]Job {job_id} not found[/red]")
+        console.print(f"[red]未找到作业 {job_id}[/red]")
 
 
 @cron_app.command("run")
 def cron_run(
-    job_id: str = typer.Argument(..., help="Job ID to run"),
-    force: bool = typer.Option(False, "--force", "-f", help="Run even if disabled"),
+    job_id: str = typer.Argument(..., help="要运行的作业 ID"),
+    force: bool = typer.Option(False, "--force", "-f", help="即使已禁用也运行"),
 ):
-    """Manually run a job."""
+    """手动运行作业。"""
     from nanobot.config.loader import get_data_dir
     from nanobot.cron.service import CronService
     
@@ -610,9 +606,9 @@ def cron_run(
         return await service.run_job(job_id, force=force)
     
     if asyncio.run(run()):
-        console.print(f"[green]✓[/green] Job executed")
+        console.print(f"[green]✓[/green] 作业已执行")
     else:
-        console.print(f"[red]Failed to run job {job_id}[/red]")
+        console.print(f"[red]运行作业 {job_id} 失败[/red]")
 
 
 # ============================================================================
@@ -622,14 +618,14 @@ def cron_run(
 
 @app.command()
 def status():
-    """Show nanobot status."""
+    """显示 nanobot 状态。"""
     from nanobot.config.loader import load_config, get_config_path
 
     config_path = get_config_path()
     config = load_config()
     workspace = config.workspace_path
 
-    console.print(f"{__logo__} nanobot Status\n")
+    console.print(f"{__logo__} nanobot 状态\n")
 
     console.print(f"Config: {config_path} {'[green]✓[/green]' if config_path.exists() else '[red]✗[/red]'}")
     console.print(f"Workspace: {workspace} {'[green]✓[/green]' if workspace.exists() else '[red]✗[/red]'}")

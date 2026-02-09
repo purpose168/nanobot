@@ -1,4 +1,4 @@
-"""Channel manager for coordinating chat channels."""
+"""用于协调聊天通道的通道管理器。"""
 
 from __future__ import annotations
 
@@ -18,12 +18,12 @@ if TYPE_CHECKING:
 
 class ChannelManager:
     """
-    Manages chat channels and coordinates message routing.
+    管理聊天通道并协调消息路由。
     
-    Responsibilities:
-    - Initialize enabled channels (Telegram, WhatsApp, etc.)
-    - Start/stop channels
-    - Route outbound messages
+    职责：
+    - 初始化启用的通道（Telegram、WhatsApp 等）
+    - 启动/停止通道
+    - 路由出站消息
     """
     
     def __init__(self, config: Config, bus: MessageBus, session_manager: "SessionManager | None" = None):
@@ -36,9 +36,9 @@ class ChannelManager:
         self._init_channels()
     
     def _init_channels(self) -> None:
-        """Initialize channels based on config."""
+        """根据配置初始化通道。"""
         
-        # Telegram channel
+        # Telegram 通道
         if self.config.channels.telegram.enabled:
             try:
                 from nanobot.channels.telegram import TelegramChannel
@@ -48,73 +48,73 @@ class ChannelManager:
                     groq_api_key=self.config.providers.groq.api_key,
                     session_manager=self.session_manager,
                 )
-                logger.info("Telegram channel enabled")
+                logger.info("Telegram 通道已启用")
             except ImportError as e:
-                logger.warning(f"Telegram channel not available: {e}")
+                logger.warning(f"Telegram 通道不可用：{e}")
         
-        # WhatsApp channel
+        # WhatsApp 通道
         if self.config.channels.whatsapp.enabled:
             try:
                 from nanobot.channels.whatsapp import WhatsAppChannel
                 self.channels["whatsapp"] = WhatsAppChannel(
                     self.config.channels.whatsapp, self.bus
                 )
-                logger.info("WhatsApp channel enabled")
+                logger.info("WhatsApp 通道已启用")
             except ImportError as e:
-                logger.warning(f"WhatsApp channel not available: {e}")
+                logger.warning(f"WhatsApp 通道不可用：{e}")
 
-        # Discord channel
+        # Discord 通道
         if self.config.channels.discord.enabled:
             try:
                 from nanobot.channels.discord import DiscordChannel
                 self.channels["discord"] = DiscordChannel(
                     self.config.channels.discord, self.bus
                 )
-                logger.info("Discord channel enabled")
+                logger.info("Discord 通道已启用")
             except ImportError as e:
-                logger.warning(f"Discord channel not available: {e}")
+                logger.warning(f"Discord 通道不可用：{e}")
         
-        # Feishu channel
+        # 飞书通道
         if self.config.channels.feishu.enabled:
             try:
                 from nanobot.channels.feishu import FeishuChannel
                 self.channels["feishu"] = FeishuChannel(
                     self.config.channels.feishu, self.bus
                 )
-                logger.info("Feishu channel enabled")
+                logger.info("飞书通道已启用")
             except ImportError as e:
-                logger.warning(f"Feishu channel not available: {e}")
+                logger.warning(f"飞书通道不可用：{e}")
     
     async def _start_channel(self, name: str, channel: BaseChannel) -> None:
-        """Start a channel and log any exceptions."""
+        """启动通道并记录任何异常。"""
         try:
             await channel.start()
         except Exception as e:
-            logger.error(f"Failed to start channel {name}: {e}")
+            logger.error(f"启动通道 {name} 失败：{e}")
 
     async def start_all(self) -> None:
-        """Start all channels and the outbound dispatcher."""
+        """启动所有通道和出站分发器。"""
         if not self.channels:
-            logger.warning("No channels enabled")
+            logger.warning("未启用任何通道")
             return
         
-        # Start outbound dispatcher
+        # 启动出站分发器
         self._dispatch_task = asyncio.create_task(self._dispatch_outbound())
         
-        # Start channels
+        # 启动通道
         tasks = []
         for name, channel in self.channels.items():
-            logger.info(f"Starting {name} channel...")
+            logger.info(f"正在启动 {name} 通道...")
             tasks.append(asyncio.create_task(self._start_channel(name, channel)))
         
-        # Wait for all to complete (they should run forever)
+        # 等待所有任务完成（它们应该永远运行）
         await asyncio.gather(*tasks, return_exceptions=True)
     
     async def stop_all(self) -> None:
-        """Stop all channels and the dispatcher."""
-        logger.info("Stopping all channels...")
+        """停止所有通道和分发器。"""
+        logger.info("正在停止所有通道...")
         
-        # Stop dispatcher
+        # 停止分发器
         if self._dispatch_task:
             self._dispatch_task.cancel()
             try:
@@ -122,17 +122,17 @@ class ChannelManager:
             except asyncio.CancelledError:
                 pass
         
-        # Stop all channels
+        # 停止所有通道
         for name, channel in self.channels.items():
             try:
                 await channel.stop()
-                logger.info(f"Stopped {name} channel")
+                logger.info(f"已停止 {name} 通道")
             except Exception as e:
-                logger.error(f"Error stopping {name}: {e}")
+                logger.error(f"停止 {name} 时出错：{e}")
     
     async def _dispatch_outbound(self) -> None:
-        """Dispatch outbound messages to the appropriate channel."""
-        logger.info("Outbound dispatcher started")
+        """将出站消息分发到适当的通道。"""
+        logger.info("出站分发器已启动")
         
         while True:
             try:
@@ -146,9 +146,9 @@ class ChannelManager:
                     try:
                         await channel.send(msg)
                     except Exception as e:
-                        logger.error(f"Error sending to {msg.channel}: {e}")
+                        logger.error(f"发送到 {msg.channel} 时出错：{e}")
                 else:
-                    logger.warning(f"Unknown channel: {msg.channel}")
+                    logger.warning(f"未知通道：{msg.channel}")
                     
             except asyncio.TimeoutError:
                 continue
@@ -156,11 +156,11 @@ class ChannelManager:
                 break
     
     def get_channel(self, name: str) -> BaseChannel | None:
-        """Get a channel by name."""
+        """根据名称获取通道。"""
         return self.channels.get(name)
     
     def get_status(self) -> dict[str, Any]:
-        """Get status of all channels."""
+        """获取所有通道的状态。"""
         return {
             name: {
                 "enabled": True,
@@ -171,5 +171,5 @@ class ChannelManager:
     
     @property
     def enabled_channels(self) -> list[str]:
-        """Get list of enabled channel names."""
+        """获取已启用通道名称的列表。"""
         return list(self.channels.keys())

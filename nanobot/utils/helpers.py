@@ -1,29 +1,29 @@
-"""Utility functions for nanobot."""
+"""nanobot 的工具函数。"""
 
 from pathlib import Path
 from datetime import datetime
 
 
 def ensure_dir(path: Path) -> Path:
-    """Ensure a directory exists, creating it if necessary."""
+    """确保目录存在，必要时创建它。"""
     path.mkdir(parents=True, exist_ok=True)
     return path
 
 
 def get_data_path() -> Path:
-    """Get the nanobot data directory (~/.nanobot)."""
+    """获取 nanobot 数据目录（~/.nanobot）。"""
     return ensure_dir(Path.home() / ".nanobot")
 
 
 def get_workspace_path(workspace: str | None = None) -> Path:
     """
-    Get the workspace path.
+    获取工作区路径。
     
-    Args:
-        workspace: Optional workspace path. Defaults to ~/.nanobot/workspace.
+    参数：
+        workspace: 可选的工作区路径。默认为 ~/.nanobot/workspace。
     
-    Returns:
-        Expanded and ensured workspace path.
+    返回：
+        扩展并确保的工作区路径。
     """
     if workspace:
         path = Path(workspace).expanduser()
@@ -33,18 +33,18 @@ def get_workspace_path(workspace: str | None = None) -> Path:
 
 
 def get_sessions_path() -> Path:
-    """Get the sessions storage directory."""
+    """获取会话存储目录。"""
     return ensure_dir(get_data_path() / "sessions")
 
 
 def get_memory_path(workspace: Path | None = None) -> Path:
-    """Get the memory directory within the workspace."""
+    """获取工作区内的记忆目录。"""
     ws = workspace or get_workspace_path()
     return ensure_dir(ws / "memory")
 
 
 def get_skills_path(workspace: Path | None = None) -> Path:
-    """Get the skills directory within the workspace."""
+    """获取工作区内的技能目录。"""
     ws = workspace or get_workspace_path()
     return ensure_dir(ws / "skills")
 

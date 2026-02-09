@@ -21,3 +21,6 @@ tests/
 
 .trae/
 
+bridge/node_modules/
+
+nanobot-env/

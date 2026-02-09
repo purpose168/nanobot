@@ -1,4 +1,4 @@
-"""Event types for the message bus."""
+"""消息总线的事件类型。"""
 
 from dataclasses import dataclass, field
 from datetime import datetime
@@ -7,31 +7,31 @@ from typing import Any
 
 @dataclass
 class InboundMessage:
-    """Message received from a chat channel."""
+    """从聊天通道接收的消息。"""
     
-    channel: str  # telegram, discord, slack, whatsapp
-    sender_id: str  # User identifier
-    chat_id: str  # Chat/channel identifier
-    content: str  # Message text
-    timestamp: datetime = field(default_factory=datetime.now)
-    media: list[str] = field(default_factory=list)  # Media URLs
-    metadata: dict[str, Any] = field(default_factory=dict)  # Channel-specific data
+    channel: str  # telegram、discord、slack、whatsapp
+    sender_id: str  # 用户标识符
+    chat_id: str  # 聊天/通道标识符
+    content: str  # 消息文本
+    timestamp: datetime = field(default_factory=datetime.now)  # 消息时间
+    media: list[str] = field(default_factory=list)  # 媒体 URL
+    metadata: dict[str, Any] = field(default_factory=dict)  # 通道特定的数据
     
     @property
     def session_key(self) -> str:
-        """Unique key for session identification."""
+        """会话标识的唯一键。"""
         return f"{self.channel}:{self.chat_id}"
 
 
 @dataclass
 class OutboundMessage:
-    """Message to send to a chat channel."""
+    """要发送到聊天通道的消息。"""
     
     channel: str
     chat_id: str
     content: str
-    reply_to: str | None = None
-    media: list[str] = field(default_factory=list)
-    metadata: dict[str, Any] = field(default_factory=dict)
+    reply_to: str | None = None  # 回复特定消息
+    media: list[str] = field(default_factory=list)  # 媒体 URL
+    metadata: dict[str, Any] = field(default_factory=dict)  # 通道特定的数据
 
 

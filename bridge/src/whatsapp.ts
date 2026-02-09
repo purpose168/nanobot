@@ -1,6 +1,6 @@
 /**
- * WhatsApp client wrapper using Baileys.
- * Based on OpenClaw's working implementation.
+ * 使用 Baileys 的 WhatsApp 客户端包装器。
+ * 基于 OpenClaw 的可用实现。
  */
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
@@ -47,9 +47,9 @@ export class WhatsAppClient {
     const { state, saveCreds } = await useMultiFileAuthState(this.options.authDir);
     const { version } = await fetchLatestBaileysVersion();
 
-    console.log(`Using Baileys version: ${version.join('.')}`);
+    console.log(`使用 Baileys 版本: ${version.join('.')}`);
 
-    // Create socket following OpenClaw's pattern
+    // 按照 OpenClaw 的模式创建套接字
     this.sock = makeWASocket({
       auth: {
         creds: state.creds,
@@ -63,20 +63,20 @@ export class WhatsAppClient {
       markOnlineOnConnect: false,
     });
 
-    // Handle WebSocket errors
+    // 处理 WebSocket 错误
     if (this.sock.ws && typeof this.sock.ws.on === 'function') {
       this.sock.ws.on('error', (err: Error) => {
-        console.error('WebSocket error:', err.message);
+        console.error('WebSocket 错误:', err.message);
       });
     }
 
-    // Handle connection updates
+    // 处理连接更新
     this.sock.ev.on('connection.update', async (update: any) => {
       const { connection, lastDisconnect, qr } = update;
 
       if (qr) {
-        // Display QR code in terminal
-        console.log('\n📱 Scan this QR code with WhatsApp (Linked Devices):\n');
+        // 在终端显示二维码
+        console.log('\n📱 使用 WhatsApp（链接设备）扫描此二维码:\n');
         qrcode.generate(qr, { small: true });
         this.options.onQR(qr);
       }
@@ -85,35 +85,35 @@ export class WhatsAppClient {
         const statusCode = (lastDisconnect?.error as Boom)?.output?.statusCode;
         const shouldReconnect = statusCode !== DisconnectReason.loggedOut;
 
-        console.log(`Connection closed. Status: ${statusCode}, Will reconnect: ${shouldReconnect}`);
+        console.log(`连接已关闭。状态: ${statusCode}, 将重新连接: ${shouldReconnect}`);
         this.options.onStatus('disconnected');
 
         if (shouldReconnect && !this.reconnecting) {
           this.reconnecting = true;
-          console.log('Reconnecting in 5 seconds...');
+          console.log('5 秒后重新连接...');
           setTimeout(() => {
             this.reconnecting = false;
             this.connect();
           }, 5000);
         }
       } else if (connection === 'open') {
-        console.log('✅ Connected to WhatsApp');
+        console.log('✅ 已连接到 WhatsApp');
         this.options.onStatus('connected');
       }
     });
 
-    // Save credentials on update
+    // 更新时保存凭证
     this.sock.ev.on('creds.update', saveCreds);
 
-    // Handle incoming messages
+    // 处理传入消息
     this.sock.ev.on('messages.upsert', async ({ messages, type }: { messages: any[]; type: string }) => {
       if (type !== 'notify') return;
 
       for (const msg of messages) {
-        // Skip own messages
+        // 跳过自己的消息
         if (msg.key.fromMe) continue;
 
-        // Skip status updates
+        // 跳过状态更新
         if (msg.key.remoteJid === 'status@broadcast') continue;
 
         const content = this.extractMessageContent(msg);
@@ -137,34 +137,34 @@ export class WhatsAppClient {
     const message = msg.message;
     if (!message) return null;
 
-    // Text message
+    // 文本消息
     if (message.conversation) {
       return message.conversation;
     }
 
-    // Extended text (reply, link preview)
+    // 扩展文本（回复、链接预览）
     if (message.extendedTextMessage?.text) {
       return message.extendedTextMessage.text;
     }
 
-    // Image with caption
+    // 带说明的图片
     if (message.imageMessage?.caption) {
-      return `[Image] ${message.imageMessage.caption}`;
+      return `[图片] ${message.imageMessage.caption}`;
     }
 
-    // Video with caption
+    // 带说明的视频
     if (message.videoMessage?.caption) {
-      return `[Video] ${message.videoMessage.caption}`;
+      return `[视频] ${message.videoMessage.caption}`;
     }
 
-    // Document with caption
+    // 带说明的文档
     if (message.documentMessage?.caption) {
-      return `[Document] ${message.documentMessage.caption}`;
+      return `[文档] ${message.documentMessage.caption}`;
     }
 
-    // Voice/Audio message
+    // 语音/音频消息
     if (message.audioMessage) {
-      return `[Voice Message]`;
+      return `[语音消息]`;
     }
 
     return null;
@@ -172,7 +172,7 @@ export class WhatsAppClient {
 
   async sendMessage(to: string, text: string): Promise<void> {
     if (!this.sock) {
-      throw new Error('Not connected');
+      throw new Error('未连接');
     }
 
     await this.sock.sendMessage(to, { text });

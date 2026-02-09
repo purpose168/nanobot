@@ -1,4 +1,4 @@
-"""Tool registry for dynamic tool management."""
+"""用于动态工具管理的工具注册表。"""
 
 from typing import Any
 
@@ -7,63 +7,63 @@ from nanobot.agent.tools.base import Tool
 
 class ToolRegistry:
     """
-    Registry for agent tools.
+    智能体工具的注册表。
     
-    Allows dynamic registration and execution of tools.
+    允许工具的动态注册和执行。
     """
     
     def __init__(self):
         self._tools: dict[str, Tool] = {}
     
     def register(self, tool: Tool) -> None:
-        """Register a tool."""
+        """注册一个工具。"""
         self._tools[tool.name] = tool
     
     def unregister(self, name: str) -> None:
-        """Unregister a tool by name."""
+        """按名称注销一个工具。"""
         self._tools.pop(name, None)
     
     def get(self, name: str) -> Tool | None:
-        """Get a tool by name."""
+        """按名称获取工具。"""
         return self._tools.get(name)
     
     def has(self, name: str) -> bool:
-        """Check if a tool is registered."""
+        """检查工具是否已注册。"""
         return name in self._tools
     
     def get_definitions(self) -> list[dict[str, Any]]:
-        """Get all tool definitions in OpenAI format."""
+        """获取 OpenAI 格式的所有工具定义。"""
         return [tool.to_schema() for tool in self._tools.values()]
     
     async def execute(self, name: str, params: dict[str, Any]) -> str:
         """
-        Execute a tool by name with given parameters.
+        使用给定参数按名称执行工具。
         
-        Args:
-            name: Tool name.
-            params: Tool parameters.
+        参数:
+            name: 工具名称。
+            params: 工具参数。
         
-        Returns:
-            Tool execution result as string.
+        返回:
+            工具执行结果（字符串形式）。
         
-        Raises:
-            KeyError: If tool not found.
+        异常:
+            KeyError: 如果未找到工具。
         """
         tool = self._tools.get(name)
         if not tool:
-            return f"Error: Tool '{name}' not found"
+            return f"错误：未找到工具 '{name}'"
 
         try:
             errors = tool.validate_params(params)
             if errors:
-                return f"Error: Invalid parameters for tool '{name}': " + "; ".join(errors)
+                return f"错误：工具 '{name}' 的参数无效：" + "; ".join(errors)
             return await tool.execute(**params)
         except Exception as e:
-            return f"Error executing {name}: {str(e)}"
+            return f"执行 {name} 时出错：{str(e)}"
     
     @property
     def tool_names(self) -> list[str]:
-        """Get list of registered tool names."""
+        """获取已注册工具名称的列表。"""
         return list(self._tools.keys())
     
     def __len__(self) -> int:

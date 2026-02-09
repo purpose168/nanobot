@@ -1,19 +1,18 @@
 #!/usr/bin/env node
 /**
- * nanobot WhatsApp Bridge
+ * nanobot WhatsApp 桥接
  * 
- * This bridge connects WhatsApp Web to nanobot's Python backend
- * via WebSocket. It handles authentication, message forwarding,
- * and reconnection logic.
+ * 此桥接通过 WebSocket 将 WhatsApp Web 连接到 nanobot 的 Python 后端。
+ * 它处理身份验证、消息转发和重新连接逻辑。
  * 
- * Usage:
+ * 使用方法：
  *   npm run build && npm start
  *   
- * Or with custom settings:
+ * 或使用自定义设置：
  *   BRIDGE_PORT=3001 AUTH_DIR=~/.nanobot/whatsapp npm start
  */
 
-// Polyfill crypto for Baileys in ESM
+// 为 ESM 中的 Baileys 填充 crypto
 import { webcrypto } from 'crypto';
 if (!globalThis.crypto) {
   (globalThis as any).crypto = webcrypto;
@@ -26,14 +25,14 @@ import { join } from 'path';
 const PORT = parseInt(process.env.BRIDGE_PORT || '3001', 10);
 const AUTH_DIR = process.env.AUTH_DIR || join(homedir(), '.nanobot', 'whatsapp-auth');
 
-console.log('🐈 nanobot WhatsApp Bridge');
+console.log('🐈 nanobot WhatsApp 桥接');
 console.log('========================\n');
 
 const server = new BridgeServer(PORT, AUTH_DIR);
 
-// Handle graceful shutdown
+// 处理优雅关闭
 process.on('SIGINT', async () => {
-  console.log('\n\nShutting down...');
+  console.log('\n\n正在关闭...');
   await server.stop();
   process.exit(0);
 });
@@ -43,8 +42,8 @@ process.on('SIGTERM', async () => {
   process.exit(0);
 });
 
-// Start the server
+// 启动服务器
 server.start().catch((error) => {
-  console.error('Failed to start bridge:', error);
+  console.error('启动桥接失败:', error);
   process.exit(1);
 });

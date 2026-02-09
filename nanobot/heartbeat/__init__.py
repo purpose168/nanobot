@@ -1,4 +1,4 @@
-"""Heartbeat service for periodic agent wake-ups."""
+"""用于定期唤醒智能体的心跳服务。"""
 
 from nanobot.heartbeat.service import HeartbeatService
 

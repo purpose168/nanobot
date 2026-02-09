@@ -1,4 +1,4 @@
-"""Session management for conversation history."""
+"""用于对话历史的会话管理。"""
 
 import json
 from pathlib import Path
@@ -14,9 +14,9 @@ from nanobot.utils.helpers import ensure_dir, safe_filename
 @dataclass
 class Session:
     """
-    A conversation session.
+    一个对话会话。
     
-    Stores messages in JSONL format for easy reading and persistence.
+    以 JSONL 格式存储消息以便于阅读和持久化。
     """
     
     key: str  # channel:chat_id
@@ -26,7 +26,7 @@ class Session:
     metadata: dict[str, Any] = field(default_factory=dict)
     
     def add_message(self, role: str, content: str, **kwargs: Any) -> None:
-        """Add a message to the session."""
+        """向会话添加一条消息。"""
         msg = {
             "role": role,
             "content": content,
@@ -38,13 +38,13 @@ class Session:
     
     def get_history(self, max_messages: int = 50) -> list[dict[str, Any]]:
         """
-        Get message history for LLM context.
+        获取用于 LLM 上下文的消息历史。
         
-        Args:
-            max_messages: Maximum messages to return.
+        参数：
+            max_messages: 要返回的最大消息数。
         
-        Returns:
-            List of messages in LLM format.
+        返回：
+            LLM 格式的消息列表。
         """
         # Get recent messages
         recent = self.messages[-max_messages:] if len(self.messages) > max_messages else self.messages
@@ -53,16 +53,16 @@ class Session:
         return [{"role": m["role"], "content": m["content"]} for m in recent]
     
     def clear(self) -> None:
-        """Clear all messages in the session."""
+        """清除会话中的所有消息。"""
         self.messages = []
         self.updated_at = datetime.now()
 
 
 class SessionManager:
     """
-    Manages conversation sessions.
+    管理对话会话。
     
-    Sessions are stored as JSONL files in the sessions directory.
+    会话以 JSONL 文件形式存储在 sessions 目录中。
     """
     
     def __init__(self, workspace: Path):
@@ -71,19 +71,19 @@ class SessionManager:
         self._cache: dict[str, Session] = {}
     
     def _get_session_path(self, key: str) -> Path:
-        """Get the file path for a session."""
+        """获取会话的文件路径。"""
         safe_key = safe_filename(key.replace(":", "_"))
         return self.sessions_dir / f"{safe_key}.jsonl"
     
     def get_or_create(self, key: str) -> Session:
         """
-        Get an existing session or create a new one.
+        获取现有会话或创建新会话。
         
-        Args:
-            key: Session key (usually channel:chat_id).
+        参数：
+            key: 会话键（通常是 channel:chat_id）。
         
-        Returns:
-            The session.
+        返回：
+            会话对象。
         """
         # Check cache
         if key in self._cache:
@@ -98,7 +98,7 @@ class SessionManager:
         return session
     
     def _load(self, key: str) -> Session | None:
-        """Load a session from disk."""
+        """从磁盘加载会话。"""
         path = self._get_session_path(key)
         
         if not path.exists():
@@ -134,7 +134,7 @@ class SessionManager:
             return None
     
     def save(self, session: Session) -> None:
-        """Save a session to disk."""
+        """将会话保存到磁盘。"""
         path = self._get_session_path(session.key)
         
         with open(path, "w") as f:
@@ -155,13 +155,13 @@ class SessionManager:
     
     def delete(self, key: str) -> bool:
         """
-        Delete a session.
+        删除会话。
         
-        Args:
-            key: Session key.
+        参数：
+            key: 会话键。
         
-        Returns:
-            True if deleted, False if not found.
+        返回：
+            如果已删除返回 True，如果未找到返回 False。
         """
         # Remove from cache
         self._cache.pop(key, None)
@@ -175,10 +175,10 @@ class SessionManager:
     
     def list_sessions(self) -> list[dict[str, Any]]:
         """
-        List all sessions.
+        列出所有会话。
         
-        Returns:
-            List of session info dicts.
+        返回：
+            会话信息字典列表。
         """
         sessions = []
         
